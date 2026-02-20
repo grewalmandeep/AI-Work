@@ -1,0 +1,56 @@
+# ContentAlchemy / Content_Generator – Project configuration
+# Use this file for tooling, CI, or documentation.
+
+name: ContentAlchemy
+description: AI-powered content marketing assistant (blog, LinkedIn, images, strategy)
+version: 1.0.0
+
+runtime:
+  language: python
+  version: "3.9+"
+  package_manager: pip
+
+# Entry points
+commands:
+  run:
+    description: Run the Streamlit app locally
+    command: streamlit run web_app/streamlit_app.py
+  run_script:
+    description: Run via runner script
+    command: python run.py
+  test_image:
+    description: Test OpenAI image generation (gpt-image-1)
+    command: python test_image_generation.py
+  check_setup:
+    description: Verify environment and API keys
+    command: python check_setup.py
+
+# Dependencies
+dependencies:
+  file: requirements.txt
+  install: pip install -r requirements.txt
+
+# Environment variables (reference; set actual values in .env)
+env:
+  required:
+    - OPENAI_API_KEY
+  optional:
+    - SERP_API_KEY
+    - ANTHROPIC_API_KEY
+    - GOOGLE_API_KEY
+    - USE_CLAUDE_AS_PRIMARY
+
+# Application
+app:
+  type: streamlit
+  entry: web_app/streamlit_app.py
+  port: 8501
+
+# Project layout (key paths)
+paths:
+  app: web_app/streamlit_app.py
+  workflow: core/langgraph_workflow.py
+  router: core/router.py
+  agents: agents/
+  integrations: integrations/
+  config: .env

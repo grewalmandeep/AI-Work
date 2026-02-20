@@ -1,0 +1,21 @@
+# ContentAlchemy – Run Streamlit app with Docker Compose
+# Usage: docker-compose up
+# Ensure .env exists with OPENAI_API_KEY (and optional SERP_API_KEY, etc.)
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    environment:
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_PORT=8501
+    volumes:
+      # Mount app code for development (optional; remove for production)
+      - .:/app
+    restart: unless-stopped

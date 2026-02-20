@@ -1,0 +1,22 @@
+# Environment Variables Template for ContentAlchemy
+# Copy this content to a .env file in the project root
+
+# OpenAI API Key (Required)
+# Get your API key from: https://platform.openai.com/api-keys
+OPENAI_API_KEY=your_openai_api_key_here
+
+# SERP API Key (Optional but recommended for research functionality)
+# Get your API key from: https://serpapi.com/
+SERP_API_KEY=your_serp_api_key_here
+
+# Anthropic Claude API Key (Optional - fallback LLM, or primary if USE_CLAUDE_AS_PRIMARY=true)
+# Get your API key from: https://console.anthropic.com/
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+# Claude model (default: claude-sonnet-4-6 for strong code/content generation)
+# ANTHROPIC_MODEL=claude-sonnet-4-6
+# Use Claude as primary LLM (when stuck with OpenAI errors, set to true)
+# USE_CLAUDE_AS_PRIMARY=true
+
+# Google Gemini API Key (Optional - used as fallback LLM, uses Gemini 2.0 Flash)
+# Get your API key from: https://makersuite.google.com/app/apikey
+GOOGLE_API_KEY=AIzaSyCwULJAelgZKONAdHmlbvfV5p3oEKGIpdg

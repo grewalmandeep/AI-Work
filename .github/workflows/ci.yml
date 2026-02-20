@@ -1,0 +1,41 @@
+# ContentAlchemy – CI workflow
+# Runs on push/PR to main: install deps and verify app can load
+
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Verify workflow import
+        run: python -c "
+from core.langgraph_workflow import ContentAlchemyWorkflow
+from core.router import WorkflowRouter
+print('Workflow and router imports OK')
+"
+        env:
+          OPENAI_API_KEY: "sk-dummy-for-ci"
+
+      - name: Verify Streamlit app loads
+        run: python -c "
+import sys
+sys.path.insert(0, '.')
+from web_app import streamlit_app
+print('Streamlit app module OK')
+"
